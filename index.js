@@ -38,13 +38,12 @@ app.get('/', (req, res) =>{
     res.send("Hello Word :v");
 });
 
+// Settings port
+app.set('port', process.env.PORT || 8985);
 
+// llama al puerto escucha o starting server
 
-
-// llama al puerto escucha 
-
-app.listen(8985, () =>
-{
-    console.log("API REST id running 8985");
+app.listen(app.get('port'), () => {
+    console.log('API running on port: '+app.get('port'));
 });
 
