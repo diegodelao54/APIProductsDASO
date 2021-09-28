@@ -47,7 +47,7 @@ exports.products_read = function(req, res)
 {
     if(req.query.id)
     {
-        Products.findById(req.query.code, function(err,products){
+        Products.findById(req.query.id, function(err,products){
             if(err)
             {
                 return next(err);

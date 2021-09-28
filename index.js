@@ -38,7 +38,7 @@ app.get('/', (req, res) =>{
     res.send("Hello Word :v");
 });
 
-// Settings port
+// Settings port dinamico
 app.set('port', process.env.PORT || 8985);
 
 // llama al puerto escucha o starting server
