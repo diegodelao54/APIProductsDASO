@@ -23,7 +23,8 @@ exports.products_create = function(req, res)
     var products = new Products({
         name:req.body.name,
         //cambio de nombre de variable para facilitar id
-        _id:req.body.id,
+        _id:req.body.code,
+        code:req.body.code,
         price:req.body.price,
         stock: req.body.stock
     });
@@ -46,7 +47,7 @@ exports.products_read = function(req, res)
 {
     if(req.query.id)
     {
-        Products.findById(req.query.id, function(err,products){
+        Products.findById(req.query.code, function(err,products){
             if(err)
             {
                 return next(err);
@@ -70,7 +71,7 @@ exports.products_read = function(req, res)
 
 exports.products_update = function(req, res)
 {
-    Products.findByIdAndUpdate(req.body.id, {$set:req.body}, function(err,products){
+    Products.findByIdAndUpdate(req.body.code, {$set:req.body}, function(err,products){
         if(err)
         {
             return next(err);
