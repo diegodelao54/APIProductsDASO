@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
 const products = require('./products');
 //ruta de la base de datos
-var dev_db_url = "mongodb://localhost:27017/db_diego";
+//var dev_db_url = "mongodb://localhost:27017/db_diego";
+var dev_db_url = "mongodb+srv://db_diego:db_diego@cluster0.br3zs.mongodb.net/db_diego?retryWrites=true&w=majority";
 
 var mongoDB = process.env.MONGODB_URI || dev_db_url
 
@@ -21,6 +22,7 @@ exports.products_create = function(req, res)
 {
     var products = new Products({
         name:req.body.name,
+        //cambio de nombre de variable para facilitar id
         _id:req.body.id,
         price:req.body.price,
         stock: req.body.stock
@@ -42,13 +44,26 @@ exports.products_create = function(req, res)
 
 exports.products_read = function(req, res)
 {
-    Products.findById(req.query.id, function(err,products){
-        if(err)
-        {
-            return next(err);
-        }
-        res.send(products)
-    });
+    if(req.query.id)
+    {
+        Products.findById(req.query.id, function(err,products){
+            if(err)
+            {
+                return next(err);
+            }
+            res.send(products)
+        });
+    }
+    else
+    {
+        Products.find({}, function(err,products){
+            if(err)
+            {
+                return next(err);
+            }
+            res.send(products)
+        });
+    }
 }
 
 //update 
